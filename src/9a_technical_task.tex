@@ -1,0 +1,27 @@
+\newpage
+
+\begin{center}
+  \myAppendix{Техническое задание}  
+
+  \pdfximage{docs/tz.pdf}
+  на \the\pdflastximagepages\ листах
+\end{center}
+
+\newpage
+
+\ifthenelse{\boolean{test_vkr}}{
+
+  \includepdf[pages=1]{docs/tz.pdf} % титульный лист ТЗ 
+%  \begin{figure}[H]
+%    \centering
+%    \includegraphics[height=0.95\textheight]{appendices/TZ_title_vkr.png} % шаблон титульного листа ТЗ
+%  \end{figure}
+  \newpage
+}{
+  \includepdf[pages=1]{docs/podpis/tz_titul.pdf} % подписанный титульный лист ТЗ
+}
+
+\newpage
+\includepdf[pages=2-]{docs/tz.pdf} % ТЗ 
+
+% \addtocounter{page}{11}

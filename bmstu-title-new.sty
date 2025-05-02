@@ -1,0 +1,537 @@
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в формулах
+%\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+%test test ewewfweew
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+\usepackage{ifthen}
+\usepackage{rotating} % чтобы плавающие объекты можно было повернуть
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Работа с картинками
+\usepackage{graphicx}  % Для вставки рисунков
+\graphicspath{{images/}{images2/}}  % папки с картинками
+\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+\setlength{\fboxrule}{0.1mm}  % Толщина линий рамки \fbox{}
+\usepackage{wrapfig} % Обтекание рисунков текстом
+
+%%% Работа с таблицами
+\usepackage{array,tabularx,tabulary,booktabs} % Дополнительная работа с таблицами
+\usepackage{longtable}  % Длинные таблицы
+\usepackage{multirow} % Слияние строк в таблице
+\usepackage{multicol} % Несколько колонок
+% Определение нового типа столбца с выравниванием по центру и указанной шириной
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+%%% Программирование
+\usepackage{etoolbox} % логические операторы
+
+\usepackage{setspace} % Интерлиньяж
+\onehalfspacing % Интерлиньяж 1.5   
+%\doublespacing % Интерлиньяж 2
+%\singlespacing % Интерлиньяж 1
+
+\usepackage{lastpage} % Узнать, сколько всего страниц в документе.
+\usepackage[figure,table]{totalcount} % Узнать, сколько в документе таблиц и рисунков командами \totalfigures{} и \totaltables{}
+
+\usepackage{soulutf8} % Модификаторы начертания  
+
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames,svgnames,table,rgb]{xcolor}
+\hypersetup{				% Гиперссылки
+    unicode=true,           % русские буквы в раздела PDF
+    pdftitle={РПЗ к ВКР Рахманов С.А. ИУ6-84Б},   % Заголовок
+    pdfauthor={Автор},      % Автор
+    pdfsubject={Тема},      % Тема
+    pdfcreator={Создатель}, % Создатель
+    pdfproducer={Производитель}, % Производитель
+    pdfkeywords={keyword1} {key2} {key3}, % Ключевые слова
+    colorlinks=true,       	% false: ссылки в рамках; true: цветные ссылки
+    linkcolor=black,          % внутренние ссылки
+    citecolor=black,        % на библиографию
+    filecolor=black,      % на файлы
+    urlcolor=black        % на URL
+}
+
+\usepackage{extsizes} % Возможность сделать 14-й шрифт
+
+%%% Страница
+\usepackage{geometry} % Простой способ задавать поля
+	\geometry{top=20mm}
+	\geometry{bottom=20mm}
+	\geometry{left=30mm}
+	\geometry{right=10mm}
+	
+% Абзацный отступ 12.5мм
+\setlength{\parindent}{12.5mm}
+\setlength{\emergencystretch}{3em} % заставляем latex делать переносы слов с запасом 3em
+
+% Настройки листингов
+\usepackage{listings}
+\usepackage{calc}
+\newlength{\numberwidth}
+\settowidth{\numberwidth}{99}
+
+% Определим отступ до номера строки
+\newlength{\numbertotalsep}
+\setlength{\numbertotalsep}{\parindent}
+
+% Определим общий отступ слева
+\newlength{\totalleftmargin}
+\setlength{\totalleftmargin}{\numbertotalsep + \numberwidth + 5pt} % Добавляем 10pt для дополнительного отступа между номером строки и текстом
+\lstset{
+    extendedchars=false,
+    inputencoding=utf8,
+    keepspaces = true,
+    breaklines=true,
+    numbers=left,
+    showspaces=false,
+    showtabs=false,
+    xleftmargin=\totalleftmargin
+}
+\usepackage{indentfirst} % Красная строка у каждого абзаца (в том числе первого)
+\usepackage{caption}  % Пакет для настройки подписей у плавающих объектов (рисунков, таблиц)
+
+\usepackage{sectsty}
+\usepackage{titlesec}
+\sectionfont{\fontsize{15}{16}\selectfont}
+% удаляем выделение жирным для заголовков 2+ уровня
+\titleformat{\subsection}
+  {\normalfont\large}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\large}{\thesubsubsection}{1em}{}
+\titleformat{\paragraph}
+  {\normalfont\large}{\theparagraph}{1em}{}
+
+% \titlespacing{command}{left}{before-sep}{after-sep}
+
+\newcommand{\sectionit}[1]{\section*{\textit{#1}}}
+\newcommand{\subsectionit}[1]{\subsection*{\textit{#1}}}
+\newcommand{\subsubsectionit}[1]{\subsubsection*{\textit{#1}}}
+\newcommand{\paragraphit}[1]{\paragraph*{\textit{#1}}}
+
+\captionsetup[figure]{name=Рисунок,labelsep=endash}
+\captionsetup[table]{name=Таблица, labelsep=endash, justification=raggedright, singlelinecheck=off}
+\captionsetup[longtable]{name=Таблица, labelsep=endash, justification=raggedright, singlelinecheck=off}
+
+% Оформление содержания
+\usepackage{titletoc}
+% \dottedcontents{<section>}[<left>]{<above-code>}{<label width>}{<leader width>}
+\dottedcontents{section}[5mm]{}{1em}{1pc}
+\dottedcontents{subsection}[17.5mm]{}{1.5em}{1pc}
+\dottedcontents{subsubsection}[22.5mm]{}{2.5em}{1pc}
+\dottedcontents{paragraph}[27.5mm]{}{3.5em}{1pc}
+
+\usepackage{caption}
+\captionsetup[table]{singlelinecheck=false}
+\captionsetup{labelsep=endash}
+% Заголовок содержания
+\addto\captionsrussian{
+	\renewcommand{\contentsname}{\centering СОДЕРЖАНИЕ}
+}
+
+% Добавление H позиции к плавающим объектам
+\usepackage{float}
+% \titleformat*{\subsubsection}{\large\bfseries} % Сделать шрифт больше
+
+% Длинное тире для маркированного списка
+%\renewcommand\labelitemi{---}
+%\renewcommand{\theenumi}{\Alph{enumi})}
+% изменение оформления нумерованного списка
+\usepackage{enumitem} % Настройка межстрочного интервала для списка
+% \setlist[enumerate,1]{
+%     label=\arabic*),  % Нумерация с арабскими цифрами
+%     left=1.25cm,         % Отступ слева
+%     parsep=0pt,       % Между абзацами в элементе списка
+%     partopsep=0pt,    % Дополнительное расстояние перед списком
+%     topsep=0pt,       % Расстояние перед началом списка
+%     itemsep=0pt,  % Интервал между элементами списка
+% }
+% \setlist[itemize,1]{
+%     label=---,  % Нумерация с арабскими цифрами
+%     left=1.25cm,         % Отступ слева
+%     parsep=0pt,       % Между абзацами в элементе списка
+%     partopsep=0pt,    % Дополнительное расстояние перед списком
+%     topsep=0pt,       % Расстояние перед началом списка
+%     itemsep=0pt,  % Интервал между элементами списка
+%     itemindent-\parindent
+% }
+%\setlist[enumerate]{label=\arabic*), leftmargin=0pt, itemindent=12.5mm, itemsep=0pt}
+\setlist[enumerate]{label=\arabic*), leftmargin=0pt, itemindent=\parindent+\labelwidth-\labelsep, noitemsep, listparindent=\parindent, nolistsep}
+% настройка ненумерованного списка
+%\setlist[itemize]{label=---, leftmargin=0pt, itemindent=12.5mm, itemsep=0pt}
+%\setlist[itemize]{label=---, leftmargin=0pt, itemindent=12.5mm, noitemsep, listparindent=\parindent}
+\setlist[itemize]{label=---, leftmargin=0pt, itemindent=\parindent+\labelwidth-\labelsep, noitemsep, listparindent=\parindent, nolistsep}
+\setlist[description]{leftmargin=0pt, itemindent=\parindent+\labelwidth, noitemsep, listparindent=\parindent, nolistsep}
+
+\newlist{biblist}{enumerate}{1} % Новый тип списка для библиографии
+\setlist[biblist,1]{label=\arabic*, leftmargin=0pt, itemindent=\parindent+\labelwidth-\labelsep, itemsep=\bibitemsep, parsep=\bibparsep,}
+
+% Работа с библиографией
+\usepackage[
+	backend=biber,
+	bibencoding=utf8,
+	sorting=none,
+	maxcitenames=2,
+	bibstyle=gost-numeric,
+	citestyle=gost-numeric
+]{biblatex}
+
+\DeclareFieldFormat{labelnumberwidth}{#1} % убираем точку из списка источников
+\DeclareFieldFormat{urldate}{(дата обращения #1)}
+
+\renewcommand*{\bibfont}{\large\onehalfspacing} % здесь \small можно заменить на любой другой размер шрифта, например \footnotesize, \normalsize, \large и т.д.
+% Установка отступа для списка использованных источников
+\defbibenvironment{bibliography}
+  {\biblist}
+  {\endbiblist}
+  {\item}
+
+% Добавляем работу с приложениями
+\newcounter{appendixNum}
+
+\newcommand{\myAppendix}[1]
+{
+	\addtocounter{appendixNum}{1}
+	\phantomsection
+	\section*{\centering ПРИЛОЖЕНИЕ \Asbuk{appendixNum}}
+	\addcontentsline{toc}{section}{ПРИЛОЖЕНИЕ \Asbuk{appendixNum}.~#1}
+	\setcounter{figure}{0}
+	\renewcommand{\thefigure}{\Asbuk{appendixNum}\arabic{figure}}
+	#1 \par
+}
+
+%инициализируем нашу "строковую переменную" либо начальным значением по умолчанию, либо ошибкой вызова, если она не была "переписана" до чтения значения.
+%\newcommand{\@variant}{} %Вывод ошибки если 
+%\newcommand{\variant}[1]{\renewcommand\@variant{#1}}  %В результате переопределяем команду \@
+
+%\newcommand{\@worknumber}{\@latex@error{No \noexpand\worknumber given}\@ehc} %Вывод ошибки если 
+\newcommand{\@worknumber}{}
+\newcommand{\worknumber}[1]{\renewcommand\@worknumber{№ #1}}  %В результате переопределяем команду \@
+
+\newcommand{\@workname}{\@latex@error{No \noexpand\workname given}\@ehc} %Вывод ошибки если 
+\newcommand{\workname}[1]{\renewcommand\@workname{#1}}  %В результате переопределяем команду \@
+
+\newcommand{\@discipline}{\@latex@error{No \noexpand\discipline given}\@ehc} %Вывод ошибки если 
+\newcommand{\discipline}[1]{\renewcommand\@discipline{#1}}  %В результате переопределяем команду \@
+
+\newcommand{\@group}{\@latex@error{No \noexpand\group given}\@ehc} %Вывод ошибки если 
+\newcommand{\group}[1]{\renewcommand\@group{#1}}  %В результате переопределяем команду \@
+
+\newcommand{\@tutor}{\@latex@error{No \noexpand\tutor given}\@ehc} %Вывод ошибки если 
+\newcommand{\@tutorstatus}{\@latex@error{No \noexpand\tutorstatus given}\@ehc} %Вывод ошибки если 
+\newcommand{\tutor}[2][Преподаватель]{\renewcommand\@tutor{#2}\renewcommand\@tutorstatus{#1}}  %В результате переопределяем команду \@
+
+\newcommand{\@inspector}{\@latex@error{No \noexpand\tutor given}\@ehc} %Вывод ошибки если 
+\newcommand{\@inspectorstatus}{\@latex@error{No \noexpand\tutorstatus given}\@ehc} %Вывод ошибки если 
+\newcommand{\inspector}[2][Нормоконтролер]{\renewcommand\@inspector{#2}\renewcommand\@inspectorstatus{#1}}  %В результате переопределяем команду \@
+
+\newcommand{\AppendixWorkName}{
+	\textbf{
+		\noindent\Large{\MakeUppercase{\@workname}}
+	}\\
+}
+
+\newcommand{\RPZtitle}{
+	\textbf{
+		\noindent\Large{РАСЧЕТНО-ПОЯСНИТЕЛЬНАЯ ЗАПИСКА}\\
+		\vspace{2mm}
+		\noindent\Large{К КУРСОВОЙ РАБОТЕ}\\
+		\vspace{2mm}
+		\noindent\Large{по дисциплине <<\@discipline>>}\\
+		\vspace{2mm}
+		\noindent\Large{НА ТЕМУ:}\\
+		\vspace{1mm}
+		\noindent\Large{\@workname}
+	}\\
+}
+
+\newcommand{\Diplomatitle}{
+	\textbf{
+		\noindent\Large{РАСЧЕТНО-ПОЯСНИТЕЛЬНАЯ ЗАПИСКА}\\
+		\vspace{2mm}
+		\noindent\Large{К ВЫПУСКНОЙ КВАЛИФИКАЦИОННОЙ РАБОТЕ БАКАЛАВРА}\\
+		\vspace{2mm}
+		\noindent\Large{НА ТЕМУ:}\\
+		\vspace{1mm}
+		\noindent\Large{\@workname}
+	}\\
+}
+
+\newcommand{\NIRtitle}{
+	\textbf{
+		\noindent\Large{РАСЧЕТНО-ПОЯСНИТЕЛЬНАЯ ЗАПИСКА}\\
+		\vspace{2mm}
+		\noindent\Large{К НАУЧНО-ИССЛЕДОВАТЕЛЬСКОЙ РАБОТЕ}\\
+		\vspace{2mm}
+		\noindent\Large{НА ТЕМУ:}\\
+		\vspace{1mm}
+		\noindent\Large{\@workname}
+	}\\
+}
+
+
+% === LABWORKTITLE ===
+\newcommand{\labworktitlelab}{
+\textbf{
+    \noindent\Large{ОТЧЕТ}\\
+    \noindent\large{по лабораторной работе \@worknumber}
+}\\
+}
+
+\newcommand{\labworktitlehome}{
+\textbf{
+    \noindent\Large{ОТЧЕТ}\\
+    \noindent\large{по домашнему заданию \@worknumber}
+}\\
+}
+
+% === LABVATIANT ===
+\newcommand{\labvariant}{}
+\newcommand{\variant}[1]{\renewcommand\labvariant{
+	\textbf{
+		\noindent\large{вариант № #1}
+	}\\
+}}  % если вариант передан, то переопределяем команду добавления варианта
+
+% === WORKTITLE ===
+\newcommand{\worktitle}{
+    \noindent
+    \renewcommand{\arraystretch}{1} % расстояние между строками
+    \begin{tabular}{ p{3.1cm} p{12cm} }
+        \textbf{Название} & \@workname \\ 
+        \textbf{Дисциплина} & \@discipline \\  
+    \end{tabular}\\
+}
+
+% === BMSTUHEAD ===
+\newcommand{\bmstuhead}{
+    \def\arraystretch{0} % вертикальный пропуск между строками таблицы = 0     
+    %\vspace{-1cm}
+	\noindent % Подавление абзацного отступа
+    \begin{tabular}{m{2cm} m{\textwidth-3cm}} %таблица для размещения текста и логотипа МГТУ.
+    %\includegraphics[width=2cm, height=2.3cm, keepaspectratio=false]{Logo} & % & отделяет левую колонку от правой, в левой ставим логотип, 
+    \includegraphics[width=2cm, height=2.3cm, keepaspectratio=false]{Logo} &
+    \begin{center}
+    	\begin{singlespacing} \footnotesize\textbf{ 
+          Министерство науки и высшего образования Российской Федерации\\
+          Федеральное государственное бюджетное образовательное учреждение \\
+          высшего образования\\
+          «Московский государственный технический университет\\
+          имени Н.Э. Баумана\\
+          (национальный исследовательский университет)»\\
+          (МГТУ им. Н.Э. Баумана)\\ }
+    	\end{singlespacing} %интерлиньяж
+    \end{center}
+    \end{tabular}
+    
+    \fontsize{2}{2}\selectfont
+    \noindent\makebox[\linewidth]{\rule{\textwidth}{2.7pt}} %горизонтальные линии при помощи \rule
+    \noindent\makebox[\linewidth]{\rule{\textwidth}{0.7pt}}
+    
+    \vspace{5mm} % вертикальный отступ, рассчитан опытным путём
+    \normalsize
+    \noindent ФАКУЛЬТЕТ \textbf{Информатика и системы управления} %\underline для подчёркивания, \uline с пакетом \usepackage{ulem} предпочтительнее.
+    \vspace{2mm}
+    
+    \noindent КАФЕДРА \textbf{Компьютерные системы и сети}
+    \vspace{2mm}
+    
+    \noindent НАПРАВЛЕНИЕ ПОДГОТОВКИ \textbf{09.03.03 Прикладная информатика}
+}
+
+\newcommand{\signs}{
+    \noindent
+    \renewcommand{\arraystretch}{0.6}
+    \begin{tabularx}{\textwidth}{ l >{\centering\arraybackslash}X c }
+         \noindent{Студент  гр. \@group} & \underline{\hspace{4cm}} & \underline{\smash{\makebox[4cm]{\@author}}} \\
+         \noindent & \footnotesize{(Подпись, дата)} & \footnotesize{(И.О.Фамилия)} \\[0.25cm]
+
+         \noindent{\@tutorstatus} & \underline{\hspace{4cm}} & \underline{\smash{\makebox[4cm]{\@tutor}}} \\
+         \noindent & \footnotesize{(Подпись, дата)} & \footnotesize{(И.О.Фамилия)} \\[0.25cm]
+
+         \noindent{\@inspectorstatus} & \underline{\hspace{4cm}} & \underline{\smash{\makebox[4cm]{\@inspector}}} \\
+         \noindent & \footnotesize{(Подпись, дата)} & \footnotesize{(И.О.Фамилия)} \\
+    \end{tabularx}
+    \renewcommand{\arraystretch}{1}
+
+}
+
+\newcommand{\appendixsigns}{
+    \noindent
+    \renewcommand{\arraystretch}{0.6}
+    \begin{tabularx}{\textwidth}{ l >{\centering\arraybackslash}X c }
+         \noindent{Студент  гр. \@group} & \underline{\hspace{4cm}} & \underline{\smash{\makebox[4cm]{\@author}}} \\
+         \noindent & \footnotesize{(Подпись, дата)} & \footnotesize{(И.О.Фамилия)} \\[0.25cm]
+
+         \noindent{\@tutorstatus} & \underline{\hspace{4cm}} & \underline{\smash{\makebox[4cm]{\@tutor}}} \\
+         \noindent & \footnotesize{(Подпись, дата)} & \footnotesize{(И.О.Фамилия)} \\
+    \end{tabularx}
+    \renewcommand{\arraystretch}{1}
+
+}
+
+% === BMSTUTITLE ===
+\newcommand{\bmstutitleRPZ}{
+	\thispagestyle{empty} % отстуствие стилей для страницы, которые определены в article.
+	\bmstuhead
+	
+	\vfill  % ВАЖНО! Пропускает ровно столько, сколько может пропустить, выравнивания среди нескольких \vfill. Аналогичная команда \hfill для горизонтального заполнения
+	\large{
+		\begin{center}
+			\RPZtitle
+		\end{center}
+		
+	}
+	
+	\vfill
+	
+	\signs
+	\vspace{1cm}
+	\begin{center}
+		\large Москва, \the\year %Логично, что печатаем текущим годом, но можно это вынести как необязательный параметр.
+	\end{center}
+	
+	\thispagestyle{empty}
+	\newpage
+}
+
+\newcommand{\bmstutitleDiploma}{
+	\thispagestyle{empty} % отстуствие стилей для страницы, которые определены в article.
+	\bmstuhead
+	
+	\vfill  % ВАЖНО! Пропускает ровно столько, сколько может пропустить, выравнивания среди нескольких \vfill. Аналогичная команда \hfill для горизонтального заполнения
+	\large{
+		\begin{center}
+			\Diplomatitle
+		\end{center}
+		
+	}
+	
+	\vfill
+	
+	\signs
+	\vspace{1cm}
+	\begin{center}
+		\large Москва, \the\year %Логично, что печатаем текущим годом, но можно это вынести как необязательный параметр.
+	\end{center}
+	
+	\thispagestyle{empty}
+	\newpage
+}
+
+\newcommand{\bmstutitleAppendix}[1]{
+	\thispagestyle{empty} % отстуствие стилей для страницы, которые определены в article.
+	\bmstuhead
+	
+	\vfill  % ВАЖНО! Пропускает ровно столько, сколько может пропустить, выравнивания среди нескольких \vfill. Аналогичная команда \hfill для горизонтального заполнения
+	\large{
+		\begin{center}
+		    \AppendixWorkName
+		    \vspace{2mm}
+		    \noindent\Large\textbf{#1}
+		\end{center}
+		
+	}
+	
+	\vfill
+	
+	\appendixsigns
+	\vspace{1cm}
+	\begin{center}
+		\large Москва, \the\year %Логично, что печатаем текущим годом, но можно это вынести как необязательный параметр.
+	\end{center}
+	
+	\thispagestyle{empty}
+	\newpage
+}
+
+\newcommand{\bmstutitleNIR}{
+	\thispagestyle{empty} % отстуствие стилей для страницы, которые определены в article.
+	\bmstuhead
+	
+	\vfill  % ВАЖНО! Пропускает ровно столько, сколько может пропустить, выравнивания среди нескольких \vfill. Аналогичная команда \hfill для горизонтального заполнения
+	\large{
+		\begin{center}
+			\NIRtitle
+		\end{center}
+		
+	}
+	
+	\vfill
+	
+	\signs
+	\vspace{1cm}
+	\begin{center}
+		\large Москва, \the\year %Логично, что печатаем текущим годом, но можно это вынести как необязательный параметр.
+	\end{center}
+	
+	\thispagestyle{empty}
+	\newpage
+}
+
+\newcommand{\bmstutitlelab}{
+    \thispagestyle{empty} % отстуствие стилей для страницы, которые определены в article.
+    \bmstuhead
+    
+    \vfill  % ВАЖНО! Пропускает ровно столько, сколько может пропустить, выравнивания среди нескольких \vfill. Аналогичная команда \hfill для горизонтального заполнения
+    \large{
+    \begin{center}
+        \labworktitlelab
+        \labvariant
+    \end{center}
+    
+    \vspace{1cm}
+    
+    \worktitle
+    }
+    
+    \vfill
+    
+    \signs
+    \vspace{1cm}
+    \begin{center}
+    \large Москва, \the\year %Логично, что печатаем текущим годом, но можно это вынести как необязательный параметр.
+    \end{center}
+    
+    \thispagestyle{empty}
+    \newpage
+}
+
+\newcommand{\bmstutitlehome}{
+    \thispagestyle{empty} % отстуствие стилей для страницы, которые определены в article.
+    \bmstuhead
+    
+    \vfill  % ВАЖНО! Пропускает ровно столько, сколько может пропустить, выравнивания среди нескольких \vfill. Аналогичная команда \hfill для горизонтального заполнения
+    \large{
+    \begin{center}
+        \labworktitlehome
+        \labvariant
+    \end{center}
+    
+    \vspace{1cm}
+    
+    \worktitle
+    }
+    
+    \vfill
+    
+    \signs
+    \vspace{1cm}
+    \begin{center}
+    \large Москва, \the\year %Логично, что печатаем текущим годом, но можно это вынести как необязательный параметр.
+    \end{center}
+    
+    \thispagestyle{empty}
+    \newpage
+}

@@ -1,0 +1,79 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{bmstu-title-new}
+\usepackage{pdfpages}
+\usepackage{acronym}
+\usepackage{totcount}
+\usepackage[export]{adjustbox}
+
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{4}
+
+\addbibresource{src/bibliography.bib}
+
+% Подсчет общего количества источников
+\newtotcounter{citenum}
+\AtEveryBibitem{\stepcounter{citenum}}
+
+\newtotcounter{pagecount}
+\newtotcounter{appendixcount}
+\newtotcounter{figurescount}
+
+\workname{Программно-аппаратная система бесконтактной оплаты}
+\discipline{Микропроцессорные системы}
+\group{ИУ6-84Б}
+\author{С. А. Рахманов}
+\tutor[Руководитель]{С. А. Хохлов}
+\inspector[Нормоконтролер]{О. Ю. Ерёмин}
+
+\newboolean{test_vkr}
+\setboolean{test_vkr}{false}
+
+\newboolean{website_upload}
+\setboolean{website_upload}{false}
+
+\begin{document}
+	\ifthenelse{\boolean{website_upload}}{
+		%\includepdf{docs/titul.pdf} %титульный лист РПЗ
+		%\includepdf{docs/task.pdf} % задание на ВКР, каждая страница отдельно
+		%\includepdf{docs/task2.pdf}
+		%\includepdf{docs/plan.pdf}
+		%\large %TODO al: fix bmstu title which enlarge font size
+	} {
+		\bmstutitleDiploma
+	}
+
+	\setcounter{page}{4}
+
+	\include{src/0_annotation}
+	
+	\include{src/1_abstract}
+	
+	\newpage
+	\begin{centering}
+		\tableofcontents
+	\end{centering}
+
+	\include{src/2_abbreviations}
+	
+	\include{src/3_intro}
+
+	\include{src/4_research_part}
+
+	%\include{src/5_design_part}
+
+	%\include{src/6_technological_part}
+
+	%\include{src/7_conclusion_part}
+
+	\include{src/8_bibliography_part}
+
+	\setcounter{pagecount}{\value{page}-1}
+	\setcounter{figurescount}{\value{figure}} % Новый счетчик, потому что в приложениях обнуляю список рисунков
+
+% TODO поменять номера страниц в приложениях
+	\include{src/9_appendicies}
+
+	\setcounter{appendixcount}{\value{appendixNum}}
+
+\end{document}
+
