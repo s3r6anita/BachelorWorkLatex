@@ -49,7 +49,16 @@
 	
 	\newpage
 	\begin{centering}
+		% меняем формат заголовка на корректный для структурного элемента
+		\titleformat{\section}
+			{\normalfont\fontsize{15}{16}\selectfont\bfseries\centering}{}{0pt}{}
+
 		\tableofcontents
+
+		% возвращаем формат заголовка
+		\titleformat{\section}
+			{\normalfont\fontsize{15}{16}\selectfont\bfseries}{\thesection}{0.5em}{} % один пробел между номером и заголовком
+
 	\end{centering}
 
 	\include{src/2_abbreviations}

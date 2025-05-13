@@ -104,14 +104,42 @@
 
 \usepackage{sectsty}
 \usepackage{titlesec}
-\sectionfont{\fontsize{15}{16}\selectfont}
-% удаляем выделение жирным для заголовков 2+ уровня
+
+% === Настройка отображения структурных эелементов отчета ===
+% без добавления в содержание
+\newcommand{\centeredsection}[1]{
+	% меняем формат заголовка
+	\titleformat{\section}
+		{\normalfont\fontsize{15}{16}\selectfont\bfseries\centering}{}{0pt}{}
+
+	\phantomsection
+	\section*{#1}%
+
+	% возвращаем формат заголовка
+	\titleformat{\section}
+		{\normalfont\fontsize{15}{16}\selectfont\bfseries}{\thesection}{0.5em}{} % один пробел между номером и заголовком
+}
+
+% === Настройка разделов ===
+\titleformat{\section}
+	{\normalfont\fontsize{15}{16}\selectfont\bfseries}{\thesection}{0.5em}{} % один пробел между номером и заголовком
+\titlespacing*{\section}{\parindent}{*1}{*1}
+
+% === Настройка подразделов ===
 \titleformat{\subsection}
-  {\normalfont\large}{\thesubsection}{1em}{}
+	{\normalfont\large\selectfont\bfseries}{\thesubsection}{0.5em}{} % один пробел
+\titlespacing*{\subsection}{\parindent}{*1}{*1}
+
+% === Настройка пунктов ===
 \titleformat{\subsubsection}
-  {\normalfont\large}{\thesubsubsection}{1em}{}
+	{\normalfont\large}{\thesubsubsection}{0.5em}{} % один пробел
+\titlespacing*{\subsubsection}{\parindent}{*1}{*1}
+
+% === Настройка подпунктов ===
 \titleformat{\paragraph}
-  {\normalfont\large}{\theparagraph}{1em}{}
+	{\normalfont\large}{\theparagraph}{0.5em}{} % один пробел
+\titlespacing*{\paragraph}{\parindent}{*1}{*1}
+
 
 % \titlespacing{command}{left}{before-sep}{after-sep}
 
@@ -213,9 +241,10 @@
 \newcommand{\myAppendix}[1]
 {
 	\addtocounter{appendixNum}{1}
-	\phantomsection
-	\section*{\centering ПРИЛОЖЕНИЕ \Asbuk{appendixNum}}
+
+	\centeredsection{ПРИЛОЖЕНИЕ \Asbuk{appendixNum}}
 	\addcontentsline{toc}{section}{ПРИЛОЖЕНИЕ \Asbuk{appendixNum}.~#1}
+
 	\setcounter{figure}{0}
 	\renewcommand{\thefigure}{\Asbuk{appendixNum}\arabic{figure}}
 	#1 \par
