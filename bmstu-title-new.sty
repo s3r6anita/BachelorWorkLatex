@@ -155,20 +155,26 @@
 % Оформление содержания
 \usepackage{titletoc}
 % \dottedcontents{<section>}[<left>]{<above-code>}{<label width>}{<leader width>}
-\dottedcontents{section}[5mm]{}
-{1pc} % ширина номера
-{1pc} % расстояние между текстом и точками
+\dottedcontents{section}[5mm]{}{1em}{1pc}
+\dottedcontents{subsection}[17.5mm]{}{1.5em}{1pc}
+\dottedcontents{subsubsection}[22.5mm]{}{2.5em}{1pc}
+\dottedcontents{paragraph}[27.5mm]{}{3.5em}{1pc}
 
-% Отступ для subsection (подраздел): 2 знака (~5 мм)
-\dottedcontents{subsection}[13.6mm]{} % ≈ 2 знака
-{2pc} % ширина номера
-{1pc} % расстояние между текстом и точками
-
-% Отступ для subsubsection (пункт): 4 знака (~10 мм)
-\dottedcontents{subsubsection}[22.25mm]{} % ≈ 4 знака
-{3pc} % ширина номера
-{1pc} % расстояние между текстом и точками
-%\dottedcontents{paragraph}[27.5mm]{}{3.5em}{1pc}
+% если по ГОСТ, а не по тестВКР:
+%\dottedcontents{section}[5mm]{}
+%{1pc} % ширина номера
+%{1pc} % расстояние между текстом и точками
+%
+%% Отступ для subsection (подраздел): 2 знака (~5 мм)
+%\dottedcontents{subsection}[13.6mm]{} % ≈ 2 знака
+%{2pc} % ширина номера
+%{1pc} % расстояние между текстом и точками
+%
+%% Отступ для subsubsection (пункт): 4 знака (~10 мм)
+%\dottedcontents{subsubsection}[22.25mm]{} % ≈ 4 знака
+%{3pc} % ширина номера
+%{1pc} % расстояние между текстом и точками
+%%\dottedcontents{paragraph}[27.5mm]{}{3.5em}{1pc}
 
 \usepackage{caption}
 \captionsetup[table]{singlelinecheck=false}
