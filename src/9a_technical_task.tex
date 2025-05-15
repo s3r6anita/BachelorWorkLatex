@@ -11,17 +11,17 @@
 
 \ifthenelse{\boolean{test_vkr}}{
 
-  \includepdf[pages=1]{docs/tz.pdf} % титульный лист ТЗ 
-%  \begin{figure}[H]
-%    \centering
-%    \includegraphics[height=0.95\textheight]{appendices/TZ_title_vkr.png} % шаблон титульного листа ТЗ
-%  \end{figure}
+%  \includepdf[pages=1]{docs/tz.pdf} % титульный лист ТЗ без подписи
+  \begin{figure}[H]
+    \centering
+    \includegraphics[height=0.95\textheight]{docs/tz v2-01.png} % титульного листа ТЗ без подписи для прохождения тестВКР
+  \end{figure}
   \newpage
 }{
   \includepdf[pages=1]{docs/podpis/tz_titul.pdf} % подписанный титульный лист ТЗ
 }
 
 \newpage
-\includepdf[pages=2-]{docs/tz.pdf} % ТЗ 
+\includepdf[pages=2-]{docs/tz v2.pdf} % ТЗ
 
 % \addtocounter{page}{11}
