@@ -1,0 +1,28 @@
+\newpage
+
+\ifthenelse{\boolean{website_upload}}{
+	\phantomsection
+  \includepdf{docs/appendix_principal.pdf}
+
+	\addtocounter{appendixNum}{1}
+	\addcontentsline{toc}{section}{ПРИЛОЖЕНИЕ \Asbuk{appendixNum}.~Схема электрическая принципиальная}
+	\setcounter{figure}{0}
+	\renewcommand{\thefigure}{\Asbuk{appendixNum}\arabic{figure}}
+}{
+    \begin{center}
+        \myAppendix{Схема электрическая принципиальная}
+        на 1 листе
+        \newpage
+    \end{center}
+}
+
+\begin{center}
+  % TODO: экспортировать принципиалку по нормальному (по границе листа, а не формата а1)
+  \begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[angle=90, height=0.9\textheight]{appendices/schemas_princip.pdf}}
+    \caption*{\centering Рисунок \Asbuk{appendixNum}1 --- Схема электричекая принципиальная}
+  \end{figure}
+\end{center}
+
+% \addtocounter{page}{1}

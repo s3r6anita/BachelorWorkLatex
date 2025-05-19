@@ -1,0 +1,35 @@
+\newpage
+
+\ifthenelse{\boolean{website_upload}}{
+	\phantomsection
+    \includepdf{docs/appendix_list_elements.pdf}
+
+	\addtocounter{appendixNum}{1}
+	\addcontentsline{toc}{section}{ПРИЛОЖЕНИЕ \Asbuk{appendixNum}.~Перечень элементов}
+	\setcounter{figure}{0}
+	\renewcommand{\thefigure}{\Asbuk{appendixNum}\arabic{figure}}
+}{
+    \begin{center}
+        \myAppendix{Перечень элементов}
+        на 2 листах
+        \newpage
+    \end{center}
+}
+
+
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{\Asbuk{appendixNum}\arabic{figure}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.9\textheight]{appendices/elements_1.pdf}
+    \caption{Перечень элементов аппаратной части системы}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.9\textheight]{appendices/elements_2.pdf}
+    \caption{Перечень элементов аппаратной части системы (окончание)}
+\end{figure}
+
+% \addtocounter{page}{2}

@@ -1,0 +1,81 @@
+\newpage
+
+\begin{center}
+   \myAppendix{Фрагменты исходного кода}
+   на 7 листах
+\end{center}
+\newpage
+
+\ifthenelse{\boolean{website_upload}}{
+  \includepdf{docs/source_title.pdf}
+}{
+  \ifthenelse{\boolean{test_vkr}}{
+    \begin{figure}[H]
+      \centering
+      \includegraphics[height=0.95\textheight]{docs/title_source_code.png}
+    \end{figure}
+    \newpage
+  }{
+    \bmstutitleAppendix{Фрагменты исходного кода}
+  }
+}
+
+\begin{singlespacing}
+	\small
+	\captionsetup{labelsep=endash, justification=raggedright, singlelinecheck=off}
+	\lstinputlisting[language=c++, label=code:spi_init, linerange={1-50}, caption={Фрагмент настройки подключения PN5180 к МК}]{code/spi_init.cpp}
+\end{singlespacing}
+
+
+
+\pagebreak
+\begin{singlespacing}
+	\small
+	\captionsetup{labelsep=endash, justification=raggedright, singlelinecheck=off}
+	\lstinputlisting[language=c++, label=code:init, caption={Настройка подключения HC-05 к МК}]{code/init.cpp}
+\end{singlespacing}
+
+
+
+\begin{singlespacing}
+    \small
+    \captionsetup{labelsep=endash, justification=raggedright, singlelinecheck=off}
+    \lstinputlisting[language=c++, label=code:control, linerange={1-22}, caption={Реализация управляющих методов для PN5180}]{code/control.cpp}
+\end{singlespacing}
+\pagebreak
+{
+    \noindent \small Продолжение листинга~\ref{code:control}
+}
+\vspace{-\baselineskip}
+\begin{singlespacing}
+    \small
+    \captionsetup{labelsep=endash, justification=raggedright, singlelinecheck=off}
+    \lstinputlisting[language=c++, linerange={23-64}, firstnumber=23, aboveskip=3mm]{code/control.cpp}
+\end{singlespacing}
+{
+    \noindent \small Продолжение листинга~\ref{code:control}
+}
+\vspace{-\baselineskip}
+\begin{singlespacing}
+    \small
+    \captionsetup{labelsep=endash, justification=raggedright, singlelinecheck=off}
+    \lstinputlisting[language=c++, linerange={65-}, firstnumber=65, aboveskip=3mm]{code/control.cpp}
+\end{singlespacing}
+
+
+
+\begin{singlespacing}
+	\small
+	\captionsetup{labelsep=endash, justification=raggedright, singlelinecheck=off}
+	\lstinputlisting[language=c++, label=code:read_serial, linerange={1-50}, caption={Чтение UID карты и проверки его корректности}]{code/read_serial.cpp}
+\end{singlespacing}
+{
+    \noindent \small Продолжение листинга~\ref{code:read_serial}
+}
+\vspace{-\baselineskip}
+\begin{singlespacing}
+    \small
+    \captionsetup{labelsep=endash, justification=raggedright, singlelinecheck=off}
+    \lstinputlisting[language=c++, linerange={51-}, firstnumber=51, aboveskip=3mm]{code/read_serial.cpp}
+\end{singlespacing}
+% \addtocounter{page}{5}

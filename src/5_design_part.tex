@@ -543,5 +543,101 @@ P{0.2\textwidth}|}
 
 \subsubsection{Программа считывателя платежных средств}
 
+% todo: добавить рисунок для mir
+
+В основу алгоритмов работы устройства легли алгоритмы, представлены на рисунках~\ref{fig:pcd_flow} и~\ref{fig:pcd_flow_2_picc_activation},~\ref{fig:transaction_flow_example} и~\ref{fig:kernel_transaction_flow}, а также алгоритмы из спецификации для ПС <<МИР>>~\cite{book_mir}.
+На основе них были разработаны несколько алгоритмов:
+
+\begin{itemize}
+    \item алгоритм перезагрузки NFC-модуля, представленный на рисунке~\ref{fig:restart_pn5180};
+    \item алгоритм выполнения платежной транзакции, представленный на рисунке~\ref{fig:complete_transaction};
+    \item алгоритм активации протокола ISO/IEC 14443--3, представленный на рисунке~\ref{fig:activate_iso3};
+    \item алгоритм активации протокола ISO/IEC 14443--4, представленный на рисунке~\ref{fig:activate_iso4};
+    \item алгоритм поиска платежных данных AFL, представленный на рисунке~\ref{fig:find_afl}.
+\end{itemize}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/design/complete_transaction}
+    \caption{\centering Схема алгоритма выполнения платежной транзакции}
+    \label{fig:complete_transaction}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/design/activate_iso3}
+    \caption{\centering Схема алгоритма активации протокола ISO/IEC 14443--3}
+    \label{fig:activate_iso3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/design/activate_iso4}
+    \caption{\centering Схема алгоритма активации протокола ISO/IEC 14443--4}
+    \label{fig:activate_iso4}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{images/design/restart_pn5180}
+    \caption{\centering Схема алгоритма перезагрузки NFC-модуля}
+    \label{fig:restart_pn5180}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/design/find_afl}
+    \caption{\centering Схема алгоритма поиска платежных данных AFL}
+    \label{fig:find_afl}
+\end{figure}
+
+
+На рисунке~\ref{fig:find_afl} представлен алгоритм поиска значения тега Application File Locator, а точнее того, чтение которого является обязательным для активации транзакции, на это указывает numRecords != 0, если оно не равно 0, то эту запись нужно считать для транзакции (пояснение приведено на рисунке~\ref{fig:afl_pic}), в то время как для других записей в AFL данный тег установлен не будет.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/design/afl_pic}
+    \caption{\centering Формат кадра AFL}
+    \label{fig:afl_pic}
+\end{figure}
+
+На основе найденного значения формируется запрос Read Record.
+Правила формирования следующие:
+
+\begin{itemize}
+    \item CLA = 0x00  - класс команды,
+    \item INS = 0xB2 - тип инструкции (Read Record),
+    \item P1 = Start - индекс первого байта,
+    \item P2 = SFI|4 - второй параметр команды на основе SFI,
+    \item Lc = 0x00 - ожидаемое количество байт в ответе (0 - любое).
+\end{itemize}
+
+Разработка программного обеспечения устройства происходила в среде STM32CubeIDE, предназначенной для разработки на микроконтроллерах серии STM32.
+STM32 умеет производить компиляцию с файлов C и C++ с помощью gcc и g++.
+В качестве основного языка программирования использовался C++, т.к. в отличие от C он предоставляет широкую поддержку парадигмы объектно-ориентированного программирования.
+Сама программа имеет модульный характер, на основе того, что в соответствие каждому аппаратному модулю (кроме МК) поставлен программный модуль, реализующий основные свойства и методы класса.
+
+Настройка STM32F103C8T6 производилась с помощью графических средств STM32CubeIDE. Пример такой настройки является настройка источника тактирования, представленная на рисунке~\ref{fig:stm_cube}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/design/stm_cube}
+    \caption{\centering Настройка источника тактирования STM32F103C8T6}
+    \label{fig:stm_cube}
+\end{figure}
+
+В качестве частоты используется 14 МГц для достижения максимальной скорости передачи данных с PN5180, который поддерживает максимальную скорость в 7 Мбит/с.
+С помощью предделителя частоты SPI, равного 2, частота APB2 (именно к ней подключен SPI1) понижается до 7 МГц и 7 Мбит/с соответственно.
+В приложении Б приведены листинги со следующими фрагментами кода:
+\begin{itemize}
+    \item настройка SPI для подключения PN51804
+    \item настройка USART для подключения Bluetooth-модуля HC-05.
+\end{itemize}
+
+Взаимодействие с PN5180 разделено на два класса PN5180 и PN5180ISO14443.
+Первый описывает реализацию основных методов управления состоянием модуля, а второй реализует специфичные для стандарта ISO14443 методы работы, с помощью которых осуществляется взаимодействие NFC-модуля и платежного средства.
+Примеры процедур, реализующих их, также приведены в приложении Б.
+
 
 \subsubsection{Программа мобильного устройства}
