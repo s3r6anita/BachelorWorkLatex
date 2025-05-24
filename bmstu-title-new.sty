@@ -133,7 +133,7 @@
 
 % === Настройка пунктов ===
 \titleformat{\subsubsection}
-	{\normalfont\large}{\thesubsubsection}{0.5em}{} % один пробел
+	{\normalfont\large\selectfont\bfseries}{\thesubsubsection}{0.5em}{} % один пробел
 \titlespacing*{\subsubsection}{\parindent}{*1}{*1}
 
 % === Настройка подпунктов ===
@@ -189,6 +189,9 @@
 \usepackage{float}
 % \titleformat*{\subsubsection}{\large\bfseries} % Сделать шрифт больше
 
+
+
+
 % Длинное тире для маркированного списка
 %\renewcommand\labelitemi{---}
 %\renewcommand{\theenumi}{\Alph{enumi})}
@@ -220,7 +223,7 @@
 \setlist[description]{leftmargin=0pt, itemindent=\parindent+\labelwidth, noitemsep, listparindent=\parindent, nolistsep}
 
 \newlist{biblist}{enumerate}{1} % Новый тип списка для библиографии
-\setlist[biblist,1]{label=\arabic*, leftmargin=0pt, itemindent=\parindent+\labelwidth-\labelsep, itemsep=\bibitemsep, parsep=\bibparsep,}
+\setlist[biblist,1]{label=\arabic*., leftmargin=0pt, itemindent=\parindent+\labelwidth-\labelsep, noitemsep, parsep=\bibparsep, nolistsep}
 
 % Работа с библиографией
 \usepackage[
@@ -228,11 +231,10 @@
 	bibencoding=utf8,
 	sorting=none,
 	maxcitenames=2,
-	bibstyle=gost-numeric,
-	citestyle=gost-numeric
+	style=gost-numeric,
 ]{biblatex}
 
-\DeclareFieldFormat{labelnumberwidth}{#1} % убираем точку из списка источников
+\urlstyle{same} % делаем ссылки обычным шрифтом
 \DeclareFieldFormat{urldate}{(дата обращения #1)}
 
 \renewcommand*{\bibfont}{\large\onehalfspacing} % здесь \small можно заменить на любой другой размер шрифта, например \footnotesize, \normalsize, \large и т.д.
