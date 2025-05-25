@@ -1,5 +1,4 @@
 int8_t PN5180ISO14443::readCardSerial(uint8_t *buffer) {
-    PN5180DEBUG_PRINTLN("PN5180ISO14443::readCardSerial(*buffer)");
 
     // Always return 10 bytes
     // Offset 0..1 is ATQA
@@ -7,7 +6,7 @@ int8_t PN5180ISO14443::readCardSerial(uint8_t *buffer) {
     // UID 4 bytes: offset 3 to 6 is UID, offset 7 to 9 to Zero
     // UID 7 bytes: offset 3 to 9 is UID
     uint8_t response[10] = {0};
-    int8_t uidLength = activateTypeA(response, 0);
+    int8_t uidLength = activateISO14443-3(response, 0);
 
     if (uidLength <= 0) {
         return uidLength;
@@ -50,10 +49,12 @@ int8_t PN5180ISO14443::readCardSerial(uint8_t *buffer) {
             // Must not be the CT-flag (0x88)!
             validUID = false;
         }
-        if ((response[6] == 0x00) && (response[7] == 0x00) && (response[8] == 0x00) && (response[9] == 0x00)) {
+        if ((response[6] == 0x00) && (response[7] == 0x00)
+            && (response[8] == 0x00) && (response[9] == 0x00)) {
             validUID = false;
         }
-        if ((response[6] == 0xFF) && (response[7] == 0xFF) && (response[8] == 0xFF) && (response[9] == 0xFF)) {
+        if ((response[6] == 0xFF) && (response[7] == 0xFF)
+            && (response[8] == 0xFF) && (response[9] == 0xFF)) {
             validUID = false;
         }
     }
