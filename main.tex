@@ -33,40 +33,36 @@
 
 \begin{document}
     \ifthenelse{\boolean{website_upload}}{
-		%\includepdf{docs/titul.pdf} %титульный лист РПЗ
-		%\includepdf{docs/podpis/zadanie.pdf} % задание на ВКР
-		%\includepdf{docs/plan.pdf}
-        \setcounter{page}{4}
-    	%\large %TODO al: fix bmstu title which enlarge font size
+		\includepdf{docs/podpis/titul.pdf} % подписанный титульный лист РПЗ
+		\includepdf{docs/podpis/zadanie.pdf} % подписанное задание на ВКР
+		\includepdf{docs/podpis/plan.pdf} % подписанный календарный план
     } {
         \bmstutitleDiploma
 
         \ifthenelse{\boolean{test_vkr}}{
             \begin{figure}[H] % задание ВКР 1 страница
                 \centering
-                \includegraphics[height=0.95\textheight]{docs/zad_and_cal_page-0001}
+                \includegraphics[height=0.95\textheight]{docs/for_latex/zad_and_cal_plan-0001}
             \end{figure}
-			\thispagestyle{empty}
+%			\thispagestyle{empty} убирать номер страницы не нужно, иначе ошибка тест вкр
             \newpage
 
             \begin{figure}[H] % задание ВКР 2 страница
                 \centering
-                \includegraphics[height=0.95\textheight]{docs/zad_and_cal_page-0002}
+                \includegraphics[height=0.95\textheight]{docs/for_latex/zad_and_cal_plan-0002}
             \end{figure}
-			\thispagestyle{empty}
             \newpage
 
             \begin{figure}[H] % календарный план
                 \centering
-                \includegraphics[height=0.95\textheight]{docs/zad_and_cal_page-0003}
+                \includegraphics[height=0.95\textheight]{docs/for_latex/zad_and_cal_plan-0003}
             \end{figure}
-			\thispagestyle{empty}
             \newpage
         }
 
-        \setcounter{page}{4}
     }
 
+    \setcounter{page}{4}
 
     \include{src/0_annotation}
 
@@ -74,7 +70,7 @@
 
     \newpage
     \begin{centering}
-        % меняем формат заголовка на корректный для структурного элемента
+        % меняем формат заголовка на корректный для структурного элемента СОДЕРЖАНИЕ
         \titleformat{\section}
         {\normalfont\fontsize{15}{16}\selectfont\bfseries\centering}{}{0pt}{}
 

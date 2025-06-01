@@ -7,12 +7,13 @@
 \newpage
 
 \ifthenelse{\boolean{website_upload}}{
-  \includepdf{docs/source_title.pdf}
+    % TODO replace file
+    \includepdf{appendices/podpis/code_titul.pdf}
 }{
   \ifthenelse{\boolean{test_vkr}}{
     \begin{figure}[H]
       \centering
-      \includegraphics[height=0.95\textheight]{docs/title_source_code.png}
+      \includegraphics[height=0.95\textheight]{docs/for_latex/title_source_code}
     \end{figure}
     \newpage
   }{
@@ -81,5 +82,3 @@
     \captionsetup{labelsep=endash, justification=raggedright, singlelinecheck=off}
     \lstinputlisting[language=c++, linerange={51-}, firstnumber=51, aboveskip=3mm]{code/read_serial.cpp}
 \end{singlespacing}
-
-% \addtocounter{page}{5}

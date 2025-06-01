@@ -1,20 +1,18 @@
 \newpage
 
 \begin{center}
-  \myAppendix{Техническое задание}  
+  \myAppendix{Техническое задание}
 
-  \pdfximage{docs/tz.pdf}
+  \pdfximage{docs/tz v2.pdf}
   на \the\pdflastximagepages\ листах
 \end{center}
 
 \newpage
 
 \ifthenelse{\boolean{test_vkr}}{
-
-%  \includepdf[pages=1]{docs/tz.pdf} % титульный лист ТЗ без подписи
   \begin{figure}[H]
     \centering
-    \includegraphics[height=0.95\textheight]{docs/tz v2-01.png} % титульного листа ТЗ без подписи для прохождения тестВКР
+    \includegraphics[height=0.95\textheight]{docs/for_latex/tz v2-01} % титульный лист ТЗ без подписи
   \end{figure}
   \newpage
 }{
@@ -23,5 +21,3 @@
 
 \newpage
 \includepdf[pages=2-]{docs/tz v2.pdf} % ТЗ
-
-% \addtocounter{page}{11}
